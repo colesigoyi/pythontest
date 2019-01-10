@@ -1,9 +1,6 @@
 
 # coding: utf-8
 
-# In[18]:
-
-
 import requests
 from bs4 import BeautifulSoup
 import re
