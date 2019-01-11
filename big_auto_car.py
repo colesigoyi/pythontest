@@ -12,23 +12,23 @@ bigurl = 'https://car.autohome.com.cn/photo/{}'
 i = 1
 for x in range(1, 5):
     newsurl = url.format(x)
-    res = requests.get(newsurl, headers = header).text#发送HTTP请求
-    #print(res)
+    res = requests.get(newsurl, headers = header).text # 发送HTTP请求
+    # print(res)
     num = re.findall('<li id="li.+?" ><a href="/photo/series/(.+?)"',res,re.S)
-    #print(num)
+    # print(num)
      
     for nums in num:
         newsurl = bigurl.format(nums)
-        #print(newsurl)
-        bigres = requests.get(newsurl, headers = header).text#发送HTTP请求
-        #print(res)
+        # print(newsurl)
+        bigres = requests.get(newsurl, headers = header).text # 发送HTTP请求
+        # print(res)
         src = re.findall('id="img" src="//car(.+?).jpg"',bigres,re.S)
-        #print(src)
+        # print(src)
         for each in src:
-        #print(each)
+        # print(each)
             try:
                 pic = requests.get("https://car" + each + ".jpg", timeout=50)
-                print("第",i,"张下载完成")
+                print("第", i, "张下载完成")
             except requests.exceptions.ConnectionError:
                 print('错误：当前图片无法啊下载。')
                 continue
@@ -38,4 +38,5 @@ for x in range(1, 5):
             fp.write(pic.content)
             fp.close()
             i += 1
+
 
